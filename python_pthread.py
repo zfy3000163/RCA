@@ -20,7 +20,6 @@ def tail_f(pipe, stop):
     with open(_path, 'r') as f:
         f.seek(0, 2)
         while count:
-            count = count - 1
             print "child stop:%s" %  stop.is_set()
 
             if stop.is_set():
@@ -31,6 +30,7 @@ def tail_f(pipe, stop):
             pos = f.tell()
             line = f.readline()
             if not line:
+                count = count - 1
                 time.sleep(0.5)
                 f.seek(pos)
             else:
